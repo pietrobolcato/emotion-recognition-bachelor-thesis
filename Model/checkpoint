@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/sharedfolder/emotions/Models/FJRA/fjra_30.tfl"
+all_model_checkpoint_paths: "/home/sharedfolder/emotions/Models/FJRA/fjra_30.tfl"
