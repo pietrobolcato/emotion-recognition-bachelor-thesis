@@ -3702,3 +3702,8 @@
 	-moz-filter: grayscale(0%);
 	filter: grayscale(100%);
 }
+
+video, canvas { /* mirror the camera */
+    transform: scale(-1, 1); 
+    -webkit-transform: scale(-1, 1); 
+}

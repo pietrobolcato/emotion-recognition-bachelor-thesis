@@ -73,7 +73,7 @@ class Network:
 
 		model.save(model_name)
 	
-	def Predict(input_file,model_name,cascade_file):
+	def Predict(input_file,model_name,cascade_file,verbose=True):
 		cascade_classifier = cv2.CascadeClassifier(cascade_file)
 		network = Network.Define()
 		model = tflearn.DNN(network)
@@ -88,7 +88,10 @@ class Network:
 			dic[labels[i]] = result[0][i]
 
 		sorted_dic = sorted(dic.items(), key=lambda kv: kv[1], reverse=True)
-		print(str(sorted_dic))
+		if (verbose):
+			print(str(sorted_dic))
+		
+		return sorted_dic
 
 	def Test(model_name,test_dir,cascade_file,verbose=True):
 		cascade_classifier = cv2.CascadeClassifier(cascade_file)
@@ -196,5 +199,6 @@ class Network:
 
 
 path = "./Model/fjra_30.tfl"
-Network.Train("./Dataset/fjra.h5",path,"fjra",False,"./TFBoard/",epoch=30)
+#Network.Train("./Dataset/fjra.h5",path,"fjra",False,"./TFBoard/",epoch=30)
 #Network.Test(path,"./Test/","./Utils/cascade.xml")
+#Network.Predict("./saved.jpg",path,"./Utils/cascade.xml")
