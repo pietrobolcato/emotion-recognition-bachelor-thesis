@@ -73,11 +73,18 @@ class Network:
 
 		model.save(model_name)
 	
-	def Predict(input_file,model_name,cascade_file,verbose=True):
-		cascade_classifier = cv2.CascadeClassifier(cascade_file)
-		network = Network.Define()
-		model = tflearn.DNN(network)
-		model.load(model_name)
+	def Predict(input_file,model_name,cascade_file,verbose=True,load=True,openCv=None):
+		if (openCv == None):
+			cascade_classifier = cv2.CascadeClassifier(cascade_file)
+		else:
+			cascade_classifier = openCv
+		
+		if (load):
+			network = Network.Define()
+			model = tflearn.DNN(network)
+			model.load(model_name)
+		else:
+			model = load
 		
 		img = cv2.imread(input_file)
 		result = model.predict(Network._FormatImage(img,cascade_classifier).reshape(1,48,48,1))
@@ -148,7 +155,7 @@ class Network:
 		l = []
 		for m in models:
 			tf.reset_default_graph()
-			l.append(Network.TestNew("bla",m,testDir,"./Utils/h.xml",True))
+			l.append(Network.Test(m,testDir,"./Utils/h.xml",True))
 		
 		labels = ["Angry","Disgust","Fear","Happy","Sad","Surprise","Neutral"]
 		avg = 0		

@@ -71,7 +71,7 @@
 							</div>
 							<div class="intro color5" id="results">
 								<h2 class="major">Results</h2>
-									<p>I can tell that you are <strong>happy</strong> with a confidence of 67% :)</p>
+									<p>I can tell that you are <strong id="emotion_name">happy</strong> <strong id="emotion_emoticon">:)</strong> with a confidence of <strong id="emotion_confidence">67%</strong></p>
 									<p style="margin: 0 0 0.5rem 0;">Check out those <strong>songs</strong> or click on the button to get more details:</p>
 									<ul class="alt">
 										<li>Lorem ipsum dolor sit.</li>
@@ -92,46 +92,12 @@
 								<div class="content">
 									<h2 class="major">Details</h2>
 									<p>
-										The total elapsed time was 236 ms. The confidence of the classified emotions is  blasblasfhasjf:
+										The total elapsed time was <span id="elapsed_time">236</span> ms. The confidence of every classified emotions is the following:
 										<br>
-										<div class="table-wrapper">
+										<div class="table-wrapper span-5">
 											<table>
-												<tbody>
-													<tr>
-														<td>Happy</td>
-														<td>67%</td>
-														<td>300% faster than a human (25ms in average)</td>
-													</tr>
-													<tr>
-														<td>Surprise</td>
-														<td>54%</td>
-														<td>150% faster than a human (45ms in average)</td>
-													</tr>
-													<tr>
-														<td>Neutral</td>
-														<td>23%</td>
-														<td>150% faster than a human (45ms in average)</td>
-													</tr>
-													<tr>
-														<td>Fear</td>
-														<td>4%</td>
-														<td>150% faster than a human (45ms in average)</td>
-													</tr>
-													<tr>
-														<td>Angry</td>
-														<td>2%</td>
-														<td>150% faster than a human (45ms in average)</td>
-													</tr>
-													<tr>
-														<td>Disgust</td>
-														<td>1%</td>
-														<td>150% faster than a human (45ms in average)</td>
-													</tr>
-													<tr>
-														<td>Sad</td>
-														<td>0.3%</td>
-														<td>150% faster than a human (45ms in average)</td>
-													</tr>
+												<tbody id="details_body">
+													
 												</tbody>
 											</table>
 										</div>

@@ -104,21 +104,36 @@ function StartProcess()
 }
 
 function postFile(file) {
+	var emoticon = {"happy":":)", "sad":":(", "angry":">:|", "surprise":":O", "fear":":'O", "neutral":":|", "disgust":":C"}
+	
     let formdata = new FormData();
     formdata.append("image", file);
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:5000/image', true);
+    xhr.open('POST', 'http://localhost:5000/emotions/api/v1.0/recognition', true);
     xhr.onload = function () {
         if (this.status === 200)
         {
             result = JSON.parse(this.response)
             console.log(result);
-            console.log(result[0][0])
-            console.log(result[0][1])
             $("#processing").fadeOut(1000, function () {
 				window.pJSDom[0].pJS.fn.vendors.destroypJS();
 				window["pJSDom"] = [];
+				best = result[0][0].toLowerCase()
+				$("#emotion_name").text(best)
+				$("#emotion_confidence").text( (result[0][1]*100).toFixed(2) + "%" )
+				$("#emotion_emoticon").text(emoticon[best])
 				$("#results").fadeIn(1000)
+				
+				// Details
+				$("#elapsed_time").text((result[7].toFixed(3))*1000)
+				$("#details_body").html("")
+				for (var i = 0; i < 7; i++)
+				{
+					$("#details_body").append("	<tr>\
+													<td>" + result[i][0] + "</td>\
+													<td>" + (result[i][1]*100).toFixed(2) + "%</td>\
+												</tr>");
+				}
 			})
 		}
         else

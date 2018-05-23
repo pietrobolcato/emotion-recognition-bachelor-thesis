@@ -1,8 +1,13 @@
-from flask import Flask, jsonify, abort, request, make_response, url_for, Response
-from flask_cors import CORS
-from Network import Network
 import json
 import numpy
+import time
+import uuid
+import os
+from tflearn import DNN
+from cv2 import CascadeClassifier
+from flask import Flask, jsonify, request, make_response, Response
+from flask_cors import CORS
+from Network import Network
 
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -19,6 +24,11 @@ app = Flask(__name__, static_url_path = "")
 CORS(app)
 model_path = "./Model/fjra_30.tfl"
 
+network = Network.Define()
+model = DNN(network)
+model.load(model_path)
+cascade = CascadeClassifier("./Utils/cascade.xml")
+
 @app.errorhandler(400)
 def not_found(error):
 	return make_response(jsonify( { 'error': 'Bad request' } ), 400)
@@ -26,16 +36,19 @@ def not_found(error):
 @app.errorhandler(404)
 def not_found(error):
 	return make_response(jsonify( { 'error': 'Not found' } ), 404)
-    
-@app.route('/emotions/api/v1.0/recognition', methods = ['POST'])
-def create_task():
-	return jsonify( { 'task': 'gigi' } ), 201
 
-@app.route('/image', methods=['POST'])
+@app.route('/emotions/api/v1.0/recognition', methods=['POST'])
 def image():
+	name = str(uuid.uuid4())
 	i = request.files['image']  # get the image
-	i.save('saved.jpg')
-	p = Network.Predict("./saved.jpg",model_path,"./Utils/cascade.xml")
+	i.save(name)
+	
+	start_time = time.time()
+	p = Network.Predict(name,model_path,"./Utils/cascade.xml",load=model,openCv=cascade)
+	elapsed_time = time.time() - start_time
+	
+	os.remove(name)
+	p.append(elapsed_time)
 	j = json.dumps(p,cls=MyEncoder)
 
 	return Response(j)
