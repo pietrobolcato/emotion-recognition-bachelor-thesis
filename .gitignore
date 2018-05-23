@@ -1,2 +1,5 @@
 Dataset/fjra.h5
 TFBoard/
+__pycache__/
+*.py[cod]
+*$py.class
