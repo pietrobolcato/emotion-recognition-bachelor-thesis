@@ -81,7 +81,7 @@ function TakePicture()
 			  console.log('callback - particles.js config loaded');
 			});
 			$("#goForth").click()
-			localStream.stop()
+			localStream.getVideoTracks()[0].stop()
 			StartProcess()
     	})
     })
