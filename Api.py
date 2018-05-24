@@ -3,6 +3,7 @@ import numpy
 import time
 import uuid
 import os
+import Music
 from tflearn import DNN
 from cv2 import CascadeClassifier
 from flask import Flask, jsonify, request, make_response, Response
@@ -45,10 +46,12 @@ def image():
 	
 	start_time = time.time()
 	p = Network.Predict(name,model_path,"./Utils/cascade.xml",load=model,openCv=cascade)
+	songs = Music.GetByMood(p[0][0])
 	elapsed_time = time.time() - start_time
 	
 	os.remove(name)
 	p.append(elapsed_time)
+	p.append(songs)
 	j = json.dumps(p,cls=MyEncoder)
 
 	return Response(j)

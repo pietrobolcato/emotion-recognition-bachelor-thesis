@@ -7,6 +7,29 @@
 var localStream;
 var detailsOpen = false;
 
+function Beginning()
+{
+	$("#details").fadeOut()
+	detailsOpen = false;
+	$("#OpenCloseDetailsBtn").removeClass("fa-angle-double-left")
+	$("#OpenCloseDetailsBtn").addClass("fa-angle-double-right")
+	$("#OpenCloseDetailsBtn").attr("href","#forth")
+	
+	$("#forth").fadeOut(2000, function () {
+		$("#results").fadeOut()
+		$("#processing").fadeIn()
+	})
+	
+	$("#third").fadeOut(2000, function () {
+		$("#outer_video").fadeOut()
+		$("#canvas").fadeOut()
+		$("#video").fadeIn()
+		$("#placeholder").fadeIn()
+	})
+	
+	localStream = null
+}
+
 function Camera()
 {
 	$("#third").fadeIn(2000)
@@ -122,6 +145,8 @@ function postFile(file) {
 				$("#emotion_name").text(best)
 				$("#emotion_confidence").text( (result[0][1]*100).toFixed(2) + "%" )
 				$("#emotion_emoticon").text(emoticon[best])
+				for (var i = 0; i < 3; i++)
+					$("#song" + i).html('<a href="' + result[8]["song_links"][i] + '" target="_blank">' + result[8]["song_names"][i] + '</a>')
 				$("#results").fadeIn(1000)
 				
 				// Details
