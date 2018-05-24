@@ -1,9 +1,4 @@
-/*
-	Ethereal by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
+var endpoint = "http://localhost:5000/"
 var localStream;
 var detailsOpen = false;
 
@@ -132,7 +127,7 @@ function postFile(file) {
     let formdata = new FormData();
     formdata.append("image", file);
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:5000/emotions/api/v1.0/recognition', true);
+    xhr.open('POST', endpoint + 'emotions/api/v1.0/recognition', true);
     xhr.onload = function () {
         if (this.status === 200)
         {

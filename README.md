@@ -1,4 +1,4 @@
-# Deep Learning for Facial Emotion Recogniton
+# Deep Learning approach for Facial Emotion Recogniton and Music Suggestion
 
 ## Abstract
 Deep convolutional neural network model and implementation to recognise emotion based on human face.
