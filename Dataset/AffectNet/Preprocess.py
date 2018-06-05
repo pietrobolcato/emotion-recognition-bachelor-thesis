@@ -2,9 +2,9 @@ import os.path
 import uuid
 import cv2
 
-csv = "./Automatically Annotated/Automatically_Annotated_file_lists/automatically_annotated.csv"
-outdir = "./Automatically Annotated/Out_normalised/"
-indir = "./Automatically Annotated/Automatically_Annotated_Images/Automatically_Annotated_Images/"
+csv = "./Manually Annotated/Manually_Annotated_file_lists/Manually_annotated.csv"
+outdir = "./Manually Annotated/Classified/"
+indir = "./Manually Annotated/Manually_Annotated_Images/"
 
 # affectnet:fer
 dict = {"0":"6",
@@ -56,5 +56,3 @@ for line in o:
 			print("Error: " + str(e))
 		
 		print("____")
-		
-		#input()
