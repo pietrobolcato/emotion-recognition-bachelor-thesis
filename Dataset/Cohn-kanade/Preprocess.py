@@ -4,7 +4,7 @@ from shutil import copyfile
 
 out_dir = "./Classified/"
 
-emo_l = ["angry","neutral","disgust","fear","happy","sad","surprise"]
+emo_l = ["0","6","1","2","3","4","5"]
 num_l = ["0","1","2","3","4","5","6"]
 
 cascade_classifier = cv2.CascadeClassifier("../../Utils/cascade.xml") #face classifier path
