@@ -41,7 +41,7 @@ class Network:
 		Y = h5f['Y'] #labels
 		X = np.reshape(X, (-1, 48, 48, 1))
 		
-		val_set = 0.015
+		val_set = 0.15
 		
 		if (val != None):
 			print("Using validation set: " + val)
