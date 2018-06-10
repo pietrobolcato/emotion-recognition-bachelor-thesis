@@ -12,7 +12,7 @@ class Network:
 		img_aug = tflearn.data_augmentation.ImageAugmentation()
 		img_aug.add_random_flip_leftright()
 		img_aug.add_random_crop((48, 48),6)
-		img_aug.add_random_rotation(max_angle=25.)		
+		img_aug.add_random_rotation(max_angle=30.)		
 
 		img_prep = tflearn.data_preprocessing.ImagePreprocessing()
 		img_prep.add_featurewise_zero_center()
@@ -186,7 +186,7 @@ class Network:
 		# None is we don't found any face - try to give back the whole picture anyway, but probably won't work welll
 		if not len(faces) > 0:
 			return cv2.resize(image, (48, 48), interpolation = cv2.INTER_CUBIC) / 255.
-			#return None
+
 		max_area_face = faces[0]
 		for face in faces:
 			if face[2] * face[3] > max_area_face[2] * max_area_face[3]:
@@ -194,7 +194,7 @@ class Network:
 		# Chop image to face
 		face = max_area_face
 		image = image[face[1]:(face[1] + face[2]), face[0]:(face[0] + face[3])]
-		#image = cv2.equalizeHist(image)
+		
 		# Resize image to network size
 		try:
 			image = cv2.resize(image, (48, 48), interpolation = cv2.INTER_CUBIC) / 255.
@@ -205,7 +205,7 @@ class Network:
 		return image
 
 
-path = "./Model/fjra_30.tfl"
+#path = "./Model/fjra_30.tfl"
 #Network.Train("./Dataset/fjra.h5",path,"fjra",False,"./TFBoard/",epoch=30)
 #Network.Test(path,"./Test/","./Utils/cascade.xml")
 #Network.Predict("./saved.jpg",path,"./Utils/cascade.xml")
