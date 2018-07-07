@@ -42,7 +42,7 @@ class Network:
 		X = np.reshape(X, (-1, 48, 48, 1))
 		
 		val_set = 0.15
-		
+ 		
 		if (val != None):
 			print("Using validation set: " + val)
 			validation = h5py.File(val, 'r')

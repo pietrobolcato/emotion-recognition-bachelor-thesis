@@ -40,7 +40,7 @@ def not_found(error):
 
 @app.route('/emotions/api/v1.0/recognition', methods=['POST'])
 def image():
-	name = str(uuid.uuid4())
+	name = str(uuid.uuid4())+".jpg"
 	i = request.files['image']  # get the image
 	i.save(name)
 	
